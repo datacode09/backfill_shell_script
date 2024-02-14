@@ -83,5 +83,19 @@ function function1() {
     # Additional tasks would be implemented here, following the same pattern
 }
 
-# Invoke function2 to start the process
-function2
+# Check if exactly two arguments are provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 start_date end_date"
+    echo "Both dates should be in YYYYMMDD format."
+    exit 1
+fi
+
+# Capture command-line arguments
+START_DATE=$1
+END_DATE=$2
+
+# Validate date format
+if ! [[ $START_DATE =~ ^[0-9]{8}$ ]] || ! [[ $END_DATE =~ ^[0-9]{8}$ ]]; then
+    echo "Error: Dates must be in YYYYMMDD format."
+    exit 1
+fi
